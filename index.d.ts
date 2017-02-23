@@ -31,6 +31,7 @@ export interface AxiosRequestConfig {
   adapter?: AxiosAdapter;
   auth?: AxiosBasicCredentials;
   responseType?: string;
+  xsrfCookieEnabled?: boolean;
   xsrfCookieName?: string;
   xsrfHeaderName?: string;
   onUploadProgress?: (progressEvent: any) => void;
@@ -44,6 +45,7 @@ export interface AxiosRequestConfig {
   cancelToken?: CancelToken;
 }
 
+// TODO fetch Response
 export interface AxiosResponse {
   data: any;
   status: number;
@@ -110,9 +112,9 @@ export interface AxiosInstance {
   get(url: string, config?: AxiosRequestConfig): AxiosPromise;
   delete(url: string, config?: AxiosRequestConfig): AxiosPromise;
   head(url: string, config?: AxiosRequestConfig): AxiosPromise;
-  post(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise;
-  put(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise;
-  patch(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise;
+  post(url: string, config?: AxiosRequestConfig): AxiosPromise;
+  put(url: string, config?: AxiosRequestConfig): AxiosPromise;
+  patch(url: string, config?: AxiosRequestConfig): AxiosPromise;
 }
 
 export interface AxiosStatic extends AxiosInstance {
@@ -122,8 +124,6 @@ export interface AxiosStatic extends AxiosInstance {
   Cancel: CancelStatic;
   CancelToken: CancelTokenStatic;
   isCancel(value: any): boolean;
-  all<T>(values: (T | Promise<T>)[]): Promise<T[]>;
-  spread<T, R>(callback: (...args: T[]) => R): (array: T[]) => R;
 }
 
 declare const Axios: AxiosStatic;
