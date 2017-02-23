@@ -6,7 +6,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/axios.svg?style=flat-square)](http://npm-stat.com/charts.html?package=axios)
 [![gitter chat](https://img.shields.io/gitter/room/mzabriskie/axios.svg?style=flat-square)](https://gitter.im/mzabriskie/axios)
 
-Promise based HTTP client for the browser and node.js
+Promise based HTTP client for the modern browser and react-native
 
 ## Features
 
@@ -139,20 +139,14 @@ For convenience aliases have been provided for all supported request methods.
 ##### axios.request(config)
 ##### axios.get(url[, config])
 ##### axios.delete(url[, config])
+##### axios.del(url[, config])
 ##### axios.head(url[, config])
-##### axios.post(url[, data[, config]])
-##### axios.put(url[, data[, config]])
-##### axios.patch(url[, data[, config]])
+##### axios.post(url[, config])
+##### axios.put(url[, config])
+##### axios.patch(url[, config])
 
 ###### NOTE
 When using the alias methods `url`, `method`, and `data` properties don't need to be specified in config.
-
-### Concurrency
-
-Helper functions for dealing with concurrent requests.
-
-##### axios.all(iterable)
-##### axios.spread(callback)
 
 ### Creating an instance
 
@@ -176,9 +170,9 @@ The available instance methods are listed below. The specified config will be me
 ##### axios#get(url[, config])
 ##### axios#delete(url[, config])
 ##### axios#head(url[, config])
-##### axios#post(url[, data[, config]])
-##### axios#put(url[, data[, config]])
-##### axios#patch(url[, data[, config]])
+##### axios#post(url[, config])
+##### axios#put(url[, config])
+##### axios#patch(url[, config])
 
 ## Request Config
 
@@ -318,6 +312,10 @@ These are the available config options for making requests. Only the `url` is re
   // (see Cancellation section below for details)
   cancelToken: new CancelToken(function (cancel) {
   })
+
+  // TODO
+  1. 可配置 transformRequest时 将object data 转为x-www-form-urlencoded 还是json
+  2. 可配置 是否将返回结果转为json
 }
 ```
 
@@ -555,8 +553,7 @@ Until axios reaches a `1.0` release, breaking changes will be released with a ne
 
 ## Promises
 
-axios depends on a native ES6 Promise implementation to be [supported](http://caniuse.com/promises).
-If your environment doesn't support ES6 Promises, you can [polyfill](https://github.com/jakearchibald/es6-promise).
+默认使用native Promise, 可通过设置axios.Promise进行配置
 
 ## TypeScript
 axios includes [TypeScript](http://typescriptlang.org) definitions.
