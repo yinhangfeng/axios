@@ -1,6 +1,6 @@
-# axios
+# ex-axios
 
-[![npm version](https://img.shields.io/npm/v/axios.svg?style=flat-square)](https://www.npmjs.org/package/axios)
+[![npm version](https://img.shields.io/npm/v/axios.svg?style=flat-square)](https://www.npmjs.org/package/axiosTODO)
 
 Promise based HTTP client for the modern browser and react-native
 
@@ -11,10 +11,10 @@ Promise based HTTP client for the modern browser and react-native
 - Intercept request and response
 - Transform request and response data
 - Cancel requests
-- Supports bluebird Cancellation
+- Supports [bluebird](https://github.com/petkaantonov/bluebird) Cancellation
 - Automatic transforms for JSON data
 - Client side support for protecting against [XSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery)
-- Compatible fetch API TODO
+- Compatible [fetch](https://github.com/github/fetch) API(Request Headers Response) TODO
 
 ## Browser Support TODO
 
