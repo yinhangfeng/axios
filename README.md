@@ -1,25 +1,22 @@
 # axios
 
 [![npm version](https://img.shields.io/npm/v/axios.svg?style=flat-square)](https://www.npmjs.org/package/axios)
-[![build status](https://img.shields.io/travis/mzabriskie/axios.svg?style=flat-square)](https://travis-ci.org/mzabriskie/axios)
-[![code coverage](https://img.shields.io/coveralls/mzabriskie/axios.svg?style=flat-square)](https://coveralls.io/r/mzabriskie/axios)
-[![npm downloads](https://img.shields.io/npm/dm/axios.svg?style=flat-square)](http://npm-stat.com/charts.html?package=axios)
-[![gitter chat](https://img.shields.io/gitter/room/mzabriskie/axios.svg?style=flat-square)](https://gitter.im/mzabriskie/axios)
 
 Promise based HTTP client for the modern browser and react-native
 
 ## Features
 
-- Make [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) from the browser
-- Make [http](http://nodejs.org/api/http.html) requests from node.js
+- Make [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) from the browser and react-native
 - Supports the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) API
 - Intercept request and response
 - Transform request and response data
 - Cancel requests
+- Supports bluebird Cancellation
 - Automatic transforms for JSON data
 - Client side support for protecting against [XSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery)
+- Compatible fetch API TODO
 
-## Browser Support
+## Browser Support TODO
 
 ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Internet_Explorer_10_logo.svg/48px-Internet_Explorer_10_logo.svg.png) |
 --- | --- | --- | --- | --- | --- |
@@ -33,18 +30,6 @@ Using npm:
 
 ```bash
 $ npm install axios
-```
-
-Using bower:
-
-```bash
-$ bower install axios
-```
-
-Using cdn:
-
-```html
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 ```
 
 ## Example
@@ -144,9 +129,6 @@ For convenience aliases have been provided for all supported request methods.
 ##### axios.post(url[, config])
 ##### axios.put(url[, config])
 ##### axios.patch(url[, config])
-
-###### NOTE
-When using the alias methods `url`, `method`, and `data` properties don't need to be specified in config.
 
 ### Creating an instance
 
@@ -319,7 +301,7 @@ These are the available config options for making requests. Only the `url` is re
 }
 ```
 
-## Response Schema
+## Response Schema TODO 兼容fetch
 
 The response for a request contains the following information.
 
@@ -365,8 +347,8 @@ You can specify config defaults that will be applied to every request.
 
 ```js
 axios.defaults.baseURL = 'https://api.example.com';
-axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.methodHeaders.common['Authorization'] = AUTH_TOKEN;
+axios.defaults.methodHeaders.post['Content-Type'] = 'application/x-www-form-urlencoded';
 ```
 
 ### Custom instance defaults
@@ -378,7 +360,7 @@ var instance = axios.create({
 });
 
 // Alter defaults after instance has been created
-instance.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+instance.defaults.methodHeaders.common['Authorization'] = AUTH_TOKEN;
 ```
 
 ### Config order of precedence
@@ -512,6 +494,8 @@ cancel();
 
 > Note: you can cancel several requests with the same cancel token.
 
+### bluebird Cancellation TODO
+
 ## Using application/x-www-form-urlencoded format
 
 By default, axios serializes JavaScript objects to `JSON`. To send data in the `application/x-www-form-urlencoded` format instead, you can use one of the following options.
@@ -533,10 +517,12 @@ Alternatively, you can encode data using the [`qs`](https://github.com/ljharb/qs
 
 ```js
 var qs = require('qs');
-axios.post('/foo', qs.stringify({ 'bar': 123 }));
+axios.post('/foo', {
+  data: qs.stringify({ 'bar': 123 })
+});
 ```
 
-### Node.js
+### Node.js TODO
 
 In node.js, you can use the [`querystring`](https://nodejs.org/api/querystring.html) module as follows:
 
@@ -554,21 +540,22 @@ Until axios reaches a `1.0` release, breaking changes will be released with a ne
 ## Promises
 
 默认使用native Promise, 可通过设置axios.Promise进行配置
+```js
+var axios = require('ex-axios');
+var Promise = require('bluebird');
+axios.Promise = Promise;
+```
 
 ## TypeScript
 axios includes [TypeScript](http://typescriptlang.org) definitions.
 ```typescript
-import axios from 'axios';
+import axios from 'ex-axios';
 axios.get('/user?ID=12345');
 ```
 
 ## Resources
 
-* [Changelog](https://github.com/mzabriskie/axios/blob/master/CHANGELOG.md)
-* [Upgrade Guide](https://github.com/mzabriskie/axios/blob/master/UPGRADE_GUIDE.md)
-* [Ecosystem](https://github.com/mzabriskie/axios/blob/master/ECOSYSTEM.md)
-* [Contributing Guide](https://github.com/mzabriskie/axios/blob/master/CONTRIBUTING.md)
-* [Code of Conduct](https://github.com/mzabriskie/axios/blob/master/CODE_OF_CONDUCT.md)
+* [axios](https://github.com/mzabriskie/axios)
 
 ## Credits
 
