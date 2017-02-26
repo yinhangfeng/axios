@@ -45,7 +45,6 @@ export interface AxiosRequestConfig {
   cancelToken?: CancelToken;
 }
 
-// TODO fetch Response
 export interface AxiosResponse {
   data: any;
   status: number;

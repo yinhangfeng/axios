@@ -20,7 +20,7 @@ Promise based HTTP client for the modern browser and react-native
 
 ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Internet_Explorer_10_logo.svg/48px-Internet_Explorer_10_logo.svg.png) |
 --- | --- | --- | --- | --- | --- |
-Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | 8+ ✔ |
+Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | 9+ ✔ |
 
 [![Browser Matrix](https://saucelabs.com/open_sauce/build_matrix/axios.svg)](https://saucelabs.com/u/axios)
 
@@ -564,3 +564,46 @@ axios is heavily inspired by the [$http service](https://docs.angularjs.org/api/
 ## License
 
 MIT
+
+## TODO
+### fetch 兼容 Response Request Headers
+https://developer.mozilla.org/en-US/docs/Web/API/Response/Response
+https://developer.mozilla.org/en-US/docs/Web/API/Request
+https://developer.mozilla.org/en-US/docs/Web/API/Headers
+* 浏览器环境: 如果有原生支持则使用原生的 否则参考whatwg-fetch 使用polyfills(Request可以不用)
+* rn: 使用全局的
+### 内部统一使用Headers(或其polyfills)处理headers 包括在interceptor中
+### 请求参数支持Request 但内部不使用
+### 浏览器使用onreadystatechange rn使用onload
+### responseType
+* 默认为json 为json时:
+  * 浏览器:
+    * 支持responseType=json的:
+判断xhr.response如果为null 说明解析json失败，需要当成请求失败处理，(不为null时 xhr.response已经为object 不能用户初始化Response，所以继承Response时需要扩展处理 .json())
+    * 不支持的:
+使用JSON.parse解析,如果出错则当成请求失败
+  * rn:
+responseType 也可通过判断返回是否为null来判断是否解析失败 可以通过xhr._response获取原始字符串
+
+* 对其他responseType 不判断其默认解析是否失败
+### 基于xhr实现 主要相对于fetch增加
+1. timeout
+2. cancel
+3. progress
+4. response 扩展
+继承Response 增加字段
+data: transformResponse处理之后的xhr.response || xhr.responseText
+config： 合并之后的请求参数
+xhr: xhr对象
+5. 请求失败扩展
+除了普通onerror失败 在onload时 通过validateStatus验证请求结果，如果不通过也返回reject
+reject Error 对象上增加字段
+config
+code
+response
+对于json 解析失败, validateStatus失败 其error对象上是有response的
+6. 请求扩展
+  * requestType(json urlencoded TODO 想一个更好的名字) 默认json 在data为普通 object 时起作用
+### 支持Request的一些配置
+cache
+
