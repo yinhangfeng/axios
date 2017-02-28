@@ -593,7 +593,7 @@ responseType 也可通过判断返回是否为null来判断是否解析失败 �
 4. response 扩展
 继承Response 增加字段
 data: transformResponse处理之后的xhr.response || xhr.responseText
-config： 合并之后的请求参数
+request: 合并之后的请求参数
 xhr: xhr对象
 5. 请求失败扩展
 除了普通onerror失败 在onload时 通过validateStatus验证请求结果，如果不通过也返回reject
