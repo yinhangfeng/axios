@@ -606,4 +606,5 @@ response
   * requestType(json urlencoded TODO 想一个更好的名字) 默认json 在data为普通 object 时起作用
 ### 支持Request的一些配置
 cache
+### response 的json text blob 等函数返回的Promise不受axios.Promise配置影响
 
