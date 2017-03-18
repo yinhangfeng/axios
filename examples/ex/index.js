@@ -8,6 +8,29 @@ const myExAxios = exAxios.create({
 
 });
 
+window.request = function request(url, responseType, method) {
+  var xhr = new XMLHttpRequest();
+
+  xhr.onload = function() {
+    console.log("onload ", xhr.response, xhr.responeText, xhr.getAllResponseHeaders(), xhr);
+  };
+
+  xhr.onerror = function() {
+    console.log("onerror", xhr);
+  };
+
+  xhr.ontimeout = function() {
+    console.log("ontimeout");
+  };
+
+  xhr.open(method || "get", url, true);
+
+  xhr.responseType = responseType || "json";
+
+  xhr.send(null);
+}
+
+
 let requestPromise;
 document.querySelector('#test1').addEventListener('click', () => {
   requestPromise = myExAxios({
@@ -26,4 +49,8 @@ document.querySelector('#test2').addEventListener('click', () => {
     requestPromise.cancel();
     requestPromise = null;
   }
+});
+
+document.querySelector('#test3').addEventListener('click', () => {
+  
 });

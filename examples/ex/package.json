@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ex-axios": "../../"
+    "body-parser": "^1.17.1",
+    "ex-axios": "../../",
+    "express": "^4.15.2"
   },
   "devDependencies": {
     "babel-core": "^6.3.26",
