@@ -83,8 +83,8 @@ function getUserPermissions() {
   return axios.get('/user/12345/permissions');
 }
 
-axios.all([getUserAccount(), getUserPermissions()])
-  .then(axios.spread(function (acct, perms) {
+Promise.all([getUserAccount(), getUserPermissions()])
+  .then((function ([acct, perms]) {
     // Both requests are now complete
   }));
 ```
@@ -561,7 +561,6 @@ axios is heavily inspired by the [$http service](https://docs.angularjs.org/api/
 MIT
 
 ## ex
-* config.cache
 * Headers
 * react-native
 * lazy parse response Headers
@@ -569,4 +568,6 @@ MIT
 * ie9+
 * defaults.transformResponse
 * defaults.methodHeaders
+* config.cache
+* remove axios.all axios.spread
 

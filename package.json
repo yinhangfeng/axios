@@ -2,7 +2,7 @@
   "name": "ex-axios",
   "version": "0.15.3",
   "description": "Promise based HTTP client for the modern browser and react-native",
-  "main": "lib/axios.js",
+  "main": "index.js",
   "scripts": {
     "test": "grunt test",
     "start": "node ./sandbox/server.js",
@@ -69,6 +69,5 @@
   },
   "typings": "./index.d.ts",
   "dependencies": {
-    "follow-redirects": "1.0.0"
   }
 }
