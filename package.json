@@ -23,7 +23,8 @@
     "ajax",
     "promise",
     "fetch",
-    "react-native"
+    "react-native",
+    "axios"
   ],
   "author": "Matt Zabriskie",
   "license": "MIT",
