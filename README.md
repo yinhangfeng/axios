@@ -1,8 +1,21 @@
 # ex-axios
 
-[![npm version](https://img.shields.io/npm/v/axios.svg?style=flat-square)](https://www.npmjs.org/package/axios)
+[![npm version](https://badge.fury.io/js/ex-axios.svg)](https://badge.fury.io/js/ex-axios)
 
 Promise based HTTP client for the modern browser and react-native
+
+## ex
+* fetch Headers
+* support react-native
+* lazy parse response Headers
+* config Promise
+* support bluebird Cancellation
+* ie9+
+* defaults.transformResponse
+* defaults.methodHeaders
+* config.cache
+* remove axios.all axios.spread
+* performance optimization
 
 ## Features
 
@@ -559,15 +572,3 @@ axios is heavily inspired by the [$http service](https://docs.angularjs.org/api/
 ## License
 
 MIT
-
-## ex
-* Headers
-* react-native
-* lazy parse response Headers
-* bluebird
-* ie9+
-* defaults.transformResponse
-* defaults.methodHeaders
-* config.cache
-* remove axios.all axios.spread
-
