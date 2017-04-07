@@ -1,6 +1,6 @@
 {
   "name": "ex-axios",
-  "version": "0.15.3",
+  "version": "0.16.0",
   "description": "Promise based HTTP client for the modern browser and react-native",
   "main": "index.js",
   "scripts": {

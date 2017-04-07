@@ -120,6 +120,18 @@ axios({
 });
 ```
 
+```js
+// GET request for remote image
+axios({
+  method:'get',
+  url:'http://bit.ly/2mTM3nY',
+  responseType:'stream'
+})
+  .then(function(response) {
+  response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
+});
+```
+
 ##### axios(url[, config])
 
 ```js
@@ -136,9 +148,13 @@ For convenience aliases have been provided for all supported request methods.
 ##### axios.delete(url[, config])
 ##### axios.del(url[, config])
 ##### axios.head(url[, config])
+##### axios.options(url[, config])
 ##### axios.post(url[, config])
 ##### axios.put(url[, config])
 ##### axios.patch(url[, config])
+
+###### NOTE
+When using the alias methods `url`, `method` properties don't need to be specified in config.
 
 ### Creating an instance
 
@@ -162,6 +178,7 @@ The available instance methods are listed below. The specified config will be me
 ##### axios#get(url[, config])
 ##### axios#delete(url[, config])
 ##### axios#head(url[, config])
+##### axios#options(url[, config])
 ##### axios#post(url[, config])
 ##### axios#put(url[, config])
 ##### axios#patch(url[, config])
@@ -294,7 +311,7 @@ These are the available config options for making requests. Only the `url` is re
   proxy: {
     host: '127.0.0.1',
     port: 9000,
-    auth: : {
+    auth: {
       username: 'mikeymike',
       password: 'rapunz3l'
     }
@@ -516,7 +533,7 @@ In a browser, you can use the [`URLSearchParams`](https://developer.mozilla.org/
 var params = new URLSearchParams();
 params.append('param1', 'value1');
 params.append('param2', 'value2');
-axios.post('/foo', params); 
+axios.post('/foo', params);
 ```
 
 > Note that `URLSearchParams` is not supported by all browsers, but there is a [polyfill](https://github.com/WebReflection/url-search-params) available (make sure to polyfill the global environment).
