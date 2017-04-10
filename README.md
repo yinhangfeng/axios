@@ -13,9 +13,10 @@ Promise based HTTP client for the modern browser and react-native
 * ie9+
 * defaults.transformResponse
 * defaults.methodHeaders
-* config.cache
+* config.cache TODO
 * remove axios.all axios.spread
 * performance optimization
+* get post ... have same parameters
 
 ## Features
 
