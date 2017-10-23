@@ -23,20 +23,52 @@ const myExAxios = exAxios.create({
 });
 
 myExAxios.interceptors.request.use((config) => {
-  console.log('interceptors request config', config);
+  console.log('interceptor-request1 config', config);
   config.headers.set('Authorization', 'xxx');
   return config;
 }, (error) => {
-  console.log('interceptors request error', error);
+  console.log('interceptor-request1 error', error);
+  return Promise.reject(error);
+});
+
+myExAxios.interceptors.request.use((config) => {
+  console.log('interceptor-request2 config', config);
+  return Promise.resolve(config);
+}, (error) => {
+  console.log('interceptor-request2 error', error);
+  throw error;
+});
+
+myExAxios.interceptors.request.use((config) => {
+  console.log('interceptor-request3 config', config);
+  return config;
+}, (error) => {
+  console.log('interceptor-request3 error', error);
+  throw error;
+});
+
+myExAxios.interceptors.response.use((res) => {
+  console.log('interceptor-response1 res', res);
+  return res;
+}, (error) => {
+  console.log('interceptor-response1 error', error);
+  throw error;
+});
+
+myExAxios.interceptors.response.use((res) => {
+  console.log('interceptor-response2 res', res);
+  return Promise.resolve(res);
+}, (error) => {
+  console.log('interceptor-response2 error', error);
   return Promise.reject(error);
 });
 
 myExAxios.interceptors.response.use((res) => {
-  console.log('interceptors response res', res);
+  console.log('interceptor-response3 res', res);
   return res;
-}, (res) => {
-  console.log('interceptors response error', res);
-  return Promise.reject(res);
+}, (error) => {
+  console.log('interceptor-response3 error', error);
+  throw error;
 });
 
 window.request = function request(url, responseType, method) {
@@ -96,6 +128,7 @@ document.querySelector('#test3').addEventListener('click', () => {
   }).finally(() => {
     console.log('test3 finally');
   });
+  console.log('xxxxx');
 });
 
 document.querySelector('#test4').addEventListener('click', () => {
