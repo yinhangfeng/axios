@@ -1,10 +1,10 @@
 {
   "name": "ex-axios",
-  "version": "0.16.1",
+  "version": "0.17.10",
   "description": "Promise based HTTP client for the modern browser and react-native",
   "main": "index.js",
   "scripts": {
-    "test": "grunt test",
+    "test": "grunt test && bundlesize",
     "start": "node ./sandbox/server.js",
     "build": "NODE_ENV=production grunt build",
     "preversion": "npm test",
@@ -28,7 +28,12 @@
   ],
   "author": "Matt Zabriskie",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/axios/axios/issues"
+  },
+  "homepage": "https://github.com/axios/axios",
   "devDependencies": {
+    "bundlesize": "^0.5.7",
     "coveralls": "^2.11.9",
     "es6-promise": "^4.0.5",
     "grunt": "^1.0.1",
@@ -70,5 +75,13 @@
   },
   "typings": "./index.d.ts",
   "dependencies": {
-  }
+    "follow-redirects": "^1.2.3",
+    "is-buffer": "^1.1.5"
+  },
+  "bundlesize": [
+    {
+      "path": "./dist/axios.min.js",
+      "threshold": "5kB"
+    }
+  ]
 }
