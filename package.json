@@ -1,6 +1,6 @@
 {
   "name": "ex-axios",
-  "version": "0.17.10",
+  "version": "0.17.11",
   "description": "Promise based HTTP client for the modern browser and react-native",
   "main": "index.js",
   "scripts": {
@@ -75,7 +75,7 @@
   },
   "typings": "./index.d.ts",
   "dependencies": {
-    "follow-redirects": "^1.2.3",
+    "follow-redirects": "^1.2.5",
     "is-buffer": "^1.1.5"
   },
   "bundlesize": [
