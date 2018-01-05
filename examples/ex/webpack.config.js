@@ -1,18 +1,34 @@
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
-  entry: './index',
-  output: {
-    filename: 'bundle.js'
+  entry: {
+    app: './index.js',
   },
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
+  // https://webpack.js.org/configuration/dev-server/
+  devServer: {
+    contentBase: './dist',
+    port: 9000,
+  },
+  plugins: [
+    // https://github.com/jantimon/html-webpack-plugin
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      hash: true,
+    }),
+  ],
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
-        query: {
-          presets: ['es2015']
-        }
       },
-    ]
-  }
+    ],
+  },
 };

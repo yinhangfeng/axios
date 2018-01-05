@@ -15,12 +15,14 @@ Promise.config({
 });
 exAxios.Promise = Promise;
 
-let headers = new Headers();
+const headers = new Headers();
 headers.set('user-agent', 'ex-axios');
 
 const myExAxios = exAxios.create({
   headers,
 });
+
+myExAxios.interceptors.request.use();
 
 myExAxios.interceptors.request.use((config) => {
   console.log('interceptor-request1 config', config);
@@ -39,6 +41,11 @@ myExAxios.interceptors.request.use((config) => {
   throw error;
 });
 
+myExAxios.interceptors.request.use(null, (error) => {
+  console.log('interceptor-requestxxx error', error);
+  return Promise.reject(error);
+});
+
 myExAxios.interceptors.request.use((config) => {
   console.log('interceptor-request3 config', config);
   return config;
@@ -46,6 +53,10 @@ myExAxios.interceptors.request.use((config) => {
   console.log('interceptor-request3 error', error);
   throw error;
 });
+
+myExAxios.interceptors.request.use();
+
+myExAxios.interceptors.response.use();
 
 myExAxios.interceptors.response.use((res) => {
   console.log('interceptor-response1 res', res);
@@ -70,6 +81,8 @@ myExAxios.interceptors.response.use((res) => {
   console.log('interceptor-response3 error', error);
   throw error;
 });
+
+myExAxios.interceptors.response.use();
 
 window.request = function request(url, responseType, method) {
   var xhr = new XMLHttpRequest();
