@@ -1,25 +1,33 @@
-# axios
+# ex-axios
 
-[![npm version](https://img.shields.io/npm/v/axios.svg?style=flat-square)](https://www.npmjs.org/package/axios)
-[![build status](https://img.shields.io/travis/axios/axios.svg?style=flat-square)](https://travis-ci.org/axios/axios)
-[![code coverage](https://img.shields.io/coveralls/mzabriskie/axios.svg?style=flat-square)](https://coveralls.io/r/mzabriskie/axios)
-[![install size](https://packagephobia.now.sh/badge?p=axios)](https://packagephobia.now.sh/result?p=axios)
-[![npm downloads](https://img.shields.io/npm/dm/axios.svg?style=flat-square)](http://npm-stat.com/charts.html?package=axios)
-[![gitter chat](https://img.shields.io/gitter/room/mzabriskie/axios.svg?style=flat-square)](https://gitter.im/mzabriskie/axios)
-[![code helpers](https://www.codetriage.com/axios/axios/badges/users.svg)](https://www.codetriage.com/axios/axios)
+[![npm version](https://badge.fury.io/js/ex-axios.svg)](https://badge.fury.io/js/ex-axios)
 
-Promise based HTTP client for the browser and node.js
+Promise based HTTP client for the modern browser and react-native
+
+## ex
+* fetch Headers
+* support react-native
+* lazy parse response Headers
+* config Promise
+* support bluebird Cancellation
+* ie9+
+* defaults.transformResponse
+* defaults.methodHeaders
+* config.cache TODO
+* remove axios.all axios.spread
+* performance optimization
+* get post ... have same parameters
 
 ## Features
 
-- Make [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) from the browser
-- Make [http](http://nodejs.org/api/http.html) requests from node.js
+- Make [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) from the browser and react-native
 - Supports the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) API
 - Intercept request and response
 - Transform request and response data
 - Cancel requests
 - Automatic transforms for JSON data
 - Client side support for protecting against [XSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery)
+- Supports [bluebird](https://github.com/petkaantonov/bluebird) Cancellation
 
 ## Browser Support
 
@@ -126,8 +134,8 @@ function getUserPermissions() {
   return axios.get('/user/12345/permissions');
 }
 
-axios.all([getUserAccount(), getUserPermissions()])
-  .then(axios.spread(function (acct, perms) {
+Promise.all([getUserAccount(), getUserPermissions()])
+  .then((function ([acct, perms]) {
     // Both requests are now complete
   }));
 ```
@@ -184,13 +192,6 @@ For convenience aliases have been provided for all supported request methods.
 
 ###### NOTE
 When using the alias methods `url`, `method`, and `data` properties don't need to be specified in config.
-
-### Concurrency
-
-Helper functions for dealing with concurrent requests.
-
-##### axios.all(iterable)
-##### axios.spread(callback)
 
 ### Creating an instance
 
@@ -396,8 +397,7 @@ The response for a request contains the following information.
   statusText: 'OK',
 
   // `headers` the headers that the server responded with
-  // All header names are lower cased
-  headers: {},
+  headers: Headers,
 
   // `config` is the config that was provided to `axios` for the request
   config: {},
@@ -432,8 +432,8 @@ You can specify config defaults that will be applied to every request.
 
 ```js
 axios.defaults.baseURL = 'https://api.example.com';
-axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.methodHeaders.common['Authorization'] = AUTH_TOKEN;
+axios.defaults.methodHeaders.post['Content-Type'] = 'application/x-www-form-urlencoded';
 ```
 
 ### Custom instance defaults
@@ -445,7 +445,7 @@ const instance = axios.create({
 });
 
 // Alter defaults after instance has been created
-instance.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+instance.defaults.methodHeaders.common['Authorization'] = AUTH_TOKEN;
 ```
 
 ### Config order of precedence

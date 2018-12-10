@@ -1,7 +1,7 @@
 {
-  "name": "axios",
-  "version": "0.19.0-beta.1",
-  "description": "Promise based HTTP client for the browser and node.js",
+  "name": "ex-axios",
+  "version": "1.19.0",
+  "description": "Promise based HTTP client for the modern browser and react-native",
   "main": "index.js",
   "scripts": {
     "test": "grunt test && bundlesize",
@@ -16,14 +16,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/axios/axios.git"
+    "url": "https://github.com/yinhangfeng/ex-axios.git"
   },
   "keywords": [
     "xhr",
     "http",
     "ajax",
     "promise",
-    "node"
+    "fetch",
+    "react-native",
+    "axios"
   ],
   "author": "Matt Zabriskie",
   "license": "MIT",
